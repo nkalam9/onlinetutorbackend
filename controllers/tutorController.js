@@ -163,7 +163,8 @@ const findTutorByLocation = async (req, res) => {
             eachTutor.tutorId=findTutorByLoc[i]._id
             let availableSlots=[]
             for(let j=0;j<findTutorByLoc[i].tutionSlots.length;j++){
-                if(findTutorByLoc[i].tutionSlots[j].reserved===false){
+                if(findTutorByLoc[i].tutionSlots[j].reserved===false && 
+                    findTutorByLoc[i].tutionSlots[j].requested===false){
                     availableSlots.push(findTutorByLoc[i].tutionSlots[j])
                 }
             }
@@ -180,5 +181,22 @@ const findTutorByLocation = async (req, res) => {
         res.status(500).json({ error: "Internal server error" })
     }
 }
+const pendingApprovals = async (req, res)=>{
+    const tutId = req.params.id
+    const notification = await Notification.findOne({tutorId:tutId})
+    let finalResponse = []
+    for(let i=0;i<notification.registrations.length;i++){
+        if(notification.registrations[i].requested=== true && notification.registrations[i].reserved===false){
+            finalResponse.push(notification.registrations[i])
+        }
+    }
+    return res.status(200).json(finalResponse)
 
-module.exports = { tutorRegister, tutorLogin, getTutorById, updateTutorById, addTutionSlot, findTutorByLocation}
+}
+const requestApprovals = async (req, res)=>{
+
+}
+
+module.exports = { tutorRegister, tutorLogin, getTutorById, updateTutorById, addTutionSlot, findTutorByLocation,
+    pendingApprovals, requestApprovals
+}
