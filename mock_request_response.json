@@ -24,14 +24,22 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 to get tutions registered by studen :-
 
-curl --location --request PUT 'localhost:4000/tutor/approveOrReject' \
+curl --location --request GET 'localhost:4000/student/registrations/671dcba604e7f42a5d34ca0d' \
 --header 'Content-Type: application/json' \
 --data '{
-    "tutorId":"671dc798e8e5b726e1be0ee9",
-    "subject":"Mathematics",
-    "approved":true
+    "tutorId":"671b67d9027115bc9b3665a6"
 }'
 
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
+
+search tutor by location
+
+curl --location 'localhost:4000/tutor/getTutorByLocation/Bengaluru/Karnataka/India'
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
 for student, Tutor registration and  login and adding slots please check from UI
+
+flow ====> register student and Tutor ======> add slots for tutor =====> search for tutor by location and request for slots
