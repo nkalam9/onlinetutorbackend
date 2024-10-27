@@ -148,8 +148,17 @@ const getRegisteredSubjects = async (req, res) => {
                     eachObj.tutotName = documents[i].tutorName
                     eachObj.tutotId = documents[i].tutorId
                     eachObj.regestiredSubjects.push(documents[i].registrations[j])
+                    const tutorDet = await Tutor.find({_id:documents[i].tutorId}, "tutionSlots");
+                    for(let k=0; k<tutorDet.length;k++){
+                    if(tutorDet[0].tutionSlots[k].subject===documents[i].registrations[j].subject){
+                        eachObj.timeFrom = tutorDet[0].tutionSlots[k].timeFrom
+                        eachObj.timeTo = tutorDet[0].tutionSlots[k].timeTo
+                    }
                 }
             }
+        }
+                
+            
             if (eachObj.regestiredSubjects.length != 0) {
                 finalResponse.push(eachObj)
             }
