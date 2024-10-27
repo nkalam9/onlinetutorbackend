@@ -5,6 +5,9 @@ const notificationSchema= new mongoose.Schema({
         type: String,
         required: true,
       },
+      tutorName:{
+        type:String
+      },
     registrations:[
         {
             subject:{
@@ -16,9 +19,16 @@ const notificationSchema= new mongoose.Schema({
             requested:{
                 type: Boolean,
             },
-            requestorId:{
-                type: String,
-            }
+            StudentDetails:
+                {
+                    studentName:{
+                        type:String
+                    },
+                    studentId:{
+                        type:String
+                    }
+                }
+            
         }
     ]
 })

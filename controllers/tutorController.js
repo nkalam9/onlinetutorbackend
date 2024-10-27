@@ -38,6 +38,7 @@ const tutorRegister = async (req, res) => {
         const tutor = await newTutor.save();
         const notification = new Notification({
             tutorId:tutor._id,
+            tutorName:tutor.name,
             registrations:[]
         })
         await notification.save()
@@ -125,7 +126,12 @@ const addTutionSlot = async (req, res) => {
             {
             subject: req.body.subject,
             reserved:false,
-            requestorId:"",
+            StudentDetails:
+                {
+                    studentName:"",
+                    studentId:""
+                }
+            ,
             requested:false
             }
         ]
@@ -181,7 +187,7 @@ const findTutorByLocation = async (req, res) => {
         res.status(500).json({ error: "Internal server error" })
     }
 }
-const pendingApprovals = async (req, res)=>{
+const getPendingApprovals = async (req, res)=>{
     const tutId = req.params.id
     const notification = await Notification.findOne({tutorId:tutId})
     let finalResponse = []
@@ -193,10 +199,10 @@ const pendingApprovals = async (req, res)=>{
     return res.status(200).json(finalResponse)
 
 }
-const requestApprovals = async (req, res)=>{
+const approveOrRejectRequests = async (req, res)=>{
 
 }
 
 module.exports = { tutorRegister, tutorLogin, getTutorById, updateTutorById, addTutionSlot, findTutorByLocation,
-    pendingApprovals, requestApprovals
+    getPendingApprovals, approveOrRejectRequests
 }

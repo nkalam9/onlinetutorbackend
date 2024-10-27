@@ -91,6 +91,7 @@ const registerForTution = async (req, res) => {
     const tId = req.body.tutorId;
     const sId = req.body.studentId;
     const subject = req.body.subject
+    const studentName = req.body.studentName
     console.log(subject)
     try {
         const findTutorFromNotification = await Notification.find({ tutorId: tId })
@@ -101,7 +102,8 @@ const registerForTution = async (req, res) => {
                     {
                         $set: {
                             'registrations.$.requested': true,
-                            'registrations.$.requestorId': sId
+                            'registrations.$.StudentDetails.studentName': studentName,
+                            'registrations.$.StudentDetails.studentId': sId
                         }
                     },
                     { new: true }
@@ -127,6 +129,19 @@ const registerForTution = async (req, res) => {
     } catch (error) {
         console.log(error)
         return res.status(500).json({ error: "Internal server errorr" })
+    }
+}
+
+const getRegisteredSubjects=async (req, res)=>{
+    const sId= req.body.id
+    const finalResponse = []
+    try{
+        const findRegisteredSubjects = await Notification.find()
+        console.log(findRegisteredSubjects)
+        return res.status(200).json(findRegisteredSubjects) 
+    }catch(error){
+        console.log(error)
+        return res.status(500).json({ error: "Internal server errorr" }) 
     }
 }
 
