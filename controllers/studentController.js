@@ -65,12 +65,12 @@ const studentLogin = async (req, res) => {
 const getStudentById = async (req, res) => {
     const studentId = req.params.id;
     try {
-        const student = await Student.findById(studentId);
+        const student = await Student.find({ _id: studentId });
         if (!student) {
             return res.status(404).json({ message: "no student exists with th id" })
         }
         return res.status(200).json({ student })
-    } catch {
+    } catch (error) {
         console.log(error)
         res.status(500).json({ message: "internal server error" })
     }
@@ -132,17 +132,35 @@ const registerForTution = async (req, res) => {
     }
 }
 
-const getRegisteredSubjects=async (req, res)=>{
-    const sId= req.body.id
+const getRegisteredSubjects = async (req, res) => {
     const finalResponse = []
-    try{
-        const findRegisteredSubjects = await Notification.find()
-        console.log(findRegisteredSubjects)
-        return res.status(200).json(findRegisteredSubjects) 
-    }catch(error){
+    const studentId = req.params.id
+    try {
+        const documents = await Notification.find({});
+        for (let i = 0; i < documents.length; i++) {
+            let eachObj = {}
+            eachObj.regestiredSubjects = []
+            for (let j = 0; j < documents[i].registrations.length; j++) {
+                //console.log(documents[i])
+
+                if (documents[i].registrations[j].StudentDetails.studentId === studentId &&
+                    documents[i].registrations[j].reserved === true) {
+                    eachObj.tutotName = documents[i].tutorName
+                    eachObj.tutotId = documents[i].tutorId
+                    eachObj.regestiredSubjects.push(documents[i].registrations[j])
+                }
+            }
+            if (eachObj.regestiredSubjects.length != 0) {
+                finalResponse.push(eachObj)
+            }
+
+
+        }
+        return res.status(200).json(finalResponse)
+    } catch (error) {
         console.log(error)
-        return res.status(500).json({ error: "Internal server errorr" }) 
+        return res.status(500).json({ error: "Internal server errorr" })
     }
 }
 
-module.exports = { studentRegister, studentLogin, getStudentById, updateStudentById, registerForTution }
+module.exports = { studentRegister, studentLogin, updateStudentById, registerForTution, getRegisteredSubjects, getStudentById }

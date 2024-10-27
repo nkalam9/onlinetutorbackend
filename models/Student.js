@@ -20,8 +20,7 @@ const studentSchema = new mongoose.Schema({
     unique:true
   },
   studentPhoto:{
-    type: String,
-    required:true,
+    type: String
   },
   email:{
     type:String,
