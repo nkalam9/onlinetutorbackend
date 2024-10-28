@@ -53,6 +53,17 @@ curl --location 'localhost:4000/student/enrollForTution' \
 
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
+to get added slots
+
+curl --location --request GET 'localhost:4000/tutor/getBookedSlots/671f8c120792f61b8654895f' \
+--header 'Content-Type: application/json' \
+--data '{
+    "tutorId":"671b67d9027115bc9b3665a6"
+}'
+
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 for student, Tutor registration and  login and adding slots please check from UI
 
 flow ====> register student and Tutor ======> add slots for tutor =====> search for tutor by location and request for slots
