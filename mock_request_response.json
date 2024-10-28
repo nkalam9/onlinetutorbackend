@@ -40,6 +40,19 @@ curl --location 'localhost:4000/tutor/getTutorByLocation/Bengaluru/Karnataka/Ind
 
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
+request tution by student
+
+curl --location 'localhost:4000/student/enrollForTution' \
+--header 'Content-Type: application/json' \
+--data '{
+    "tutorId":"671b67d9027115bc9b3665a6",
+    "subject":"History",
+    "studentId":"342635475",
+    "studentName":"Naresh"
+}'
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
 for student, Tutor registration and  login and adding slots please check from UI
 
 flow ====> register student and Tutor ======> add slots for tutor =====> search for tutor by location and request for slots
