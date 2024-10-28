@@ -90,7 +90,7 @@ const tutorSchema = new mongoose.Schema({
             subject:{
                 type: String,
             },
-            tutionData:{
+            tuitionDate:{
                 type: String,
             },
             timeFrom:{

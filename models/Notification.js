@@ -25,7 +25,7 @@ const notificationSchema= new mongoose.Schema({
             timeTo:{
                 type: String,
             },
-            tutionData:{
+            tuitionDate:{
                 type: String,
             },
             StudentDetails:
