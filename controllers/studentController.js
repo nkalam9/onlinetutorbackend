@@ -51,7 +51,7 @@ const studentLogin = async (req, res) => {
         if (!(password === student.password)) {
             return res.status(401).json({ error: "Invalid password" })
         }
-        const token = jwt.sign({ userId: student._id, type: "student" }, secretkey, { expiresIn: "1h" });
+        const token = jwt.sign({ userId: student._id, type: "student", studentName:student.name }, secretkey, { expiresIn: "1h" });
 
         res.status(200).json({ success: "student logged in successfully", token });
         console.log(student.email)
