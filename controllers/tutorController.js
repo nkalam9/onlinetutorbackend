@@ -292,9 +292,10 @@ const getApprovedSlots = async (req, res) => {
     console.log(registrations)
     let finalResponse = []
     for (let i = 0; i < registrations.registrations.length; i++) {
-        if (registrations.registrations[i].reserved === true ) {
-            finalResponse.push(registrations.registrations[i])
-        }
+        finalResponse.push(registrations.registrations[i])
+        // if (registrations.registrations[i].reserved === true ) {
+            
+        // }
     }
     return res.status(200).json(finalResponse)
 
