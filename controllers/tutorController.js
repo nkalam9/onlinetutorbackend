@@ -117,6 +117,7 @@ const addTutionSlot = async (req, res) => {
                     tutionDate: req.body.tuitionDate,
                     timeFrom: req.body.tuitionTimeFrom,
                     timeTo: req.body.tuitionTimeTo,
+                    tutionData:req.body.tutionDate,
                     fee: req.body.tuitionFee,
                     user: "",
                     reserved: false,
@@ -131,6 +132,7 @@ const addTutionSlot = async (req, res) => {
                     reserved: false,
                     timeFrom: req.body.tuitionTimeFrom,
                     timeTo: req.body.tuitionTimeTo,
+                    tutionData:req.body.tutionDate,
                     StudentDetails:
                     {
                         studentName: "",
