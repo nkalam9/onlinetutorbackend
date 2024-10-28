@@ -51,7 +51,7 @@ const studentLogin = async (req, res) => {
         if (!(password === student.password)) {
             return res.status(401).json({ error: "Invalid password" })
         }
-        const token = jwt.sign({ userId: student._id, type: "student", studentName:student.name }, secretkey, { expiresIn: "1h" });
+        const token = jwt.sign({ userId: student._id, type: "student", studentName: student.name }, secretkey, { expiresIn: "1h" });
 
         res.status(200).json({ success: "student logged in successfully", token });
         console.log(student.email)
@@ -81,7 +81,8 @@ const updateStudentById = async (req, res) => {
     const studentId = req.params.id;
     try {
         const updatedStudent = await Student.findByIdAndUpdate(studentId, req.body, { new: true })
-        return res.status(200).json({ student: updatedStudent })
+        // return res.status(200).json({ student: updatedStudent })
+        return res.status(200).json({ message: "student details updated successfully" })
     } catch (error) {
         return res.status(500).json({ error: "Internal server error" })
     }
@@ -148,17 +149,17 @@ const getRegisteredSubjects = async (req, res) => {
                     eachObj.tutotName = documents[i].tutorName
                     eachObj.tutotId = documents[i].tutorId
                     eachObj.regestiredSubjects.push(documents[i].registrations[j])
-                    const tutorDet = await Tutor.find({_id:documents[i].tutorId}, "tutionSlots");
-                    for(let k=0; k<tutorDet.length;k++){
-                    if(tutorDet[0].tutionSlots[k].subject===documents[i].registrations[j].subject){
-                        eachObj.timeFrom = tutorDet[0].tutionSlots[k].timeFrom
-                        eachObj.timeTo = tutorDet[0].tutionSlots[k].timeTo
-                    }
+                    const tutorDet = await Tutor.find({ _id: documents[i].tutorId }, "tutionSlots");
+                    // for (let k = 0; k < tutorDet.length; k++) {
+                    //     if (tutorDet[0].tutionSlots[k].subject === documents[i].registrations[j].subject) {
+                    //         eachObj.timeFrom = tutorDet[0].tutionSlots[k].timeFrom
+                    //         eachObj.timeTo = tutorDet[0].tutionSlots[k].timeTo
+                    //     }
+                    // }
                 }
             }
-        }
-                
-            
+
+
             if (eachObj.regestiredSubjects.length != 0) {
                 finalResponse.push(eachObj)
             }

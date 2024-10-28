@@ -19,6 +19,12 @@ const notificationSchema= new mongoose.Schema({
             requested:{
                 type: Boolean,
             },
+            timeFrom:{
+                type: String,
+            },
+            timeTo:{
+                type: String,
+            },
             StudentDetails:
                 {
                     studentName:{

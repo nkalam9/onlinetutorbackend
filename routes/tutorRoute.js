@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.post('/register', tutorController.tutorRegister);
 router.post('/login', tutorController.tutorLogin);
+router.get('/getBookedSlots/:id', tutorController.getApprovedSlots)
 router.get('/:id', tutorController.getTutorById);
 router.put('/approveOrReject', tutorController.approveOrRejectRequests);
 router.put('/:id', tutorController.updateTutorById);
