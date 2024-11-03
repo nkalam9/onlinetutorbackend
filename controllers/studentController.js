@@ -43,8 +43,18 @@ const studentRegister = async (req, res) => {
 }
 const studentLogin = async (req, res) => {
     const { email, password } = req.body;
+    const userId = email
+    let student;
     try {
-        const student = await Student.findOne({ email });
+        pattern="^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$"
+        if(email.match(pattern)) {
+            student = await Student.findOne({ email });
+            console.log("logging in via user email")
+        }
+        else {
+         student = await Student.findOne({ userId });
+         console.log("logging in via user Name")
+        }
         if (!student) {
             return res.status(401).json({ error: "Invalid userName" })
         }
